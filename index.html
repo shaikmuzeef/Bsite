@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Mohiseen</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Great+Vibes&family=Marcellus&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory: #fbf7f0;
+    --cream: #f4ead9;
+    --plum: #7a2f2f;
+    --plum-dark: #4a1e1e;
+    --gold: #b8862f;
+    --gold-soft: #d9b978;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background: var(--ivory);
+    color: var(--plum-dark);
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x:hidden;
+  }
+
+  .petal-field{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+  }
+  .petal{
+    position:absolute; opacity:0.12; color:var(--plum);
+    animation: drift linear infinite;
+  }
+  @keyframes drift{
+    0%{ transform: translateY(0) rotate(0deg); }
+    100%{ transform: translateY(-120vh) rotate(20deg); }
+  }
+
+  section{
+    position:relative; z-index:1;
+    min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding: 60px 24px;
+    text-align:center;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(circle at 50% 20%, rgba(217,185,120,0.15), transparent 60%),
+      var(--ivory);
+  }
+
+  .eyebrow{
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    font-family: 'Marcellus', serif;
+    font-size: 13px;
+    color: var(--gold);
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.3s;
+  }
+
+  .name{
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(64px, 12vw, 140px);
+    color: var(--plum);
+    line-height: 1;
+    opacity: 0;
+    animation: fadeUp 1.2s ease forwards 0.7s;
+  }
+
+  .tagline{
+    margin-top: 26px;
+    font-family: 'Marcellus', serif;
+    font-size: clamp(16px, 2.4vw, 22px);
+    letter-spacing: 0.06em;
+    color: var(--plum-dark);
+    opacity:0;
+    animation: fadeUp 1s ease forwards 1.3s;
+  }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(18px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+
+  .scroll-hint{
+    margin-top: 60px;
+    font-family:'Marcellus', serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    opacity:0;
+    animation: fadeIn 1s ease forwards 1.8s, bob 2.5s ease-in-out infinite 2.3s;
+  }
+  @keyframes fadeIn{ to{ opacity:1; } }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(8px); }
+  }
+
+  /* ---------- MESSAGE ---------- */
+  .message-section{ background: var(--cream); }
+
+  .divider{
+    width: 70px; height: 1px; background: var(--gold);
+    margin: 0 auto 34px auto;
+  }
+
+  .msg-title{
+    font-family: 'Marcellus', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    color: var(--plum);
+    margin-bottom: 30px;
+  }
+
+  .msg-body{
+    max-width: 560px;
+    font-size: clamp(19px, 2.4vw, 24px);
+    line-height: 2;
+    color: var(--plum-dark);
+  }
+
+  .msg-body strong{
+    color: var(--plum);
+    font-family:'Marcellus', serif;
+    font-weight: 600;
+  }
+
+  /* ---------- CAKE SECTION ---------- */
+  .cake-section{ background: var(--ivory); }
+
+  .cake-instructions{
+    font-family:'Marcellus', serif;
+    font-size: 15px;
+    letter-spacing:0.08em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  .cake-wrap{
+    position:relative;
+    width: min(260px, 70vw);
+    cursor:pointer;
+  }
+  .cake-wrap svg{ width:100%; display:block; }
+
+  .flame{
+    transform-origin: center bottom;
+    animation: flicker 1.4s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .cake-wrap.lit .flame{ opacity: 1; }
+
+  @keyframes flicker{
+    0%,100%{ transform: scaleY(1) rotate(0deg); }
+    50%{ transform: scaleY(1.12) rotate(-2deg); }
+  }
+
+  .glow{
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  .cake-wrap.lit .glow{ opacity: 0.5; }
+
+  .hidden-note{
+    max-width: 480px;
+    font-size: clamp(18px, 2.2vw, 22px);
+    line-height: 1.9;
+    color: var(--plum-dark);
+    opacity: 0;
+    height: 0;
+    overflow:hidden;
+    transition: opacity 1s ease 0.3s;
+  }
+  .hidden-note.show{
+    opacity: 1;
+    height: auto;
+    margin-top: 40px;
+  }
+
+  .tap-label{
+    margin-top: 18px;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    font-family:'Marcellus', serif;
+  }
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    background: var(--plum);
+    color: var(--ivory);
+  }
+
+  .closing .name-small{
+    font-family:'Great Vibes', cursive;
+    font-size: clamp(48px, 8vw, 90px);
+    color: var(--gold-soft);
+    margin-bottom: 22px;
+  }
+
+  .closing p{
+    font-size: clamp(17px, 2.2vw, 21px);
+    max-width: 480px;
+    line-height: 1.9;
+    opacity: 0.92;
+  }
+
+  .closing .signoff{
+    margin-top: 30px;
+    font-family:'Marcellus', serif;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    color: var(--gold-soft);
+    opacity: 0.85;
+  }
+
+  .closing .stars{
+    margin-top: 30px;
+    font-size: 20px;
+    letter-spacing: 10px;
+    color: var(--gold-soft);
+  }
+
+  footer{
+    text-align:center;
+    padding: 22px;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--gold-soft);
+    background: var(--plum);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="petal-field" id="petalField"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">A small surprise for you</div>
+  <h1 class="name">Mohiseen</h1>
+  <p class="tagline">Happy Birthday ✦</p>
+  <div class="scroll-hint">scroll down ↓</div>
+</section>
+
+<!-- MESSAGE -->
+<section class="message-section">
+  <div class="divider"></div>
+  <div class="msg-title">Today is your day</div>
+  <p class="msg-body">
+    I hope today feels easy and warm.<br><br>
+    I hope it's full of small things you love —
+    the color <strong>white</strong>, soft mornings, good company.<br><br>
+    <strong>Happy Birthday, Mohiseen.</strong> Enjoy every bit of it.
+  </p>
+</section>
+
+<!-- CAKE -->
+<section class="cake-section">
+  <div class="cake-instructions">tap to light the candle</div>
+
+  <div class="cake-wrap" id="cakeWrap">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- plate -->
+      <ellipse cx="100" cy="175" rx="70" ry="10" fill="#e8ddc8"/>
+      <!-- cake bottom tier -->
+      <rect x="40" y="140" width="120" height="35" rx="6" fill="#7a2f2f"/>
+      <rect x="40" y="140" width="120" height="8" fill="#fbf7f0"/>
+      <!-- cake top tier -->
+      <rect x="60" y="110" width="80" height="32" rx="6" fill="#9a4a4a"/>
+      <rect x="60" y="110" width="80" height="7" fill="#fbf7f0"/>
+      <!-- candle -->
+      <rect x="96" y="82" width="8" height="30" rx="2" fill="#d9b978"/>
+      <!-- flame -->
+      <g class="flame">
+        <ellipse cx="100" cy="76" rx="6" ry="10" fill="#f2a33c"/>
+        <ellipse cx="100" cy="78" rx="3" ry="5.5" fill="#fbe08a"/>
+      </g>
+      <circle class="glow" cx="100" cy="78" r="22" fill="#f2a33c" opacity="0"/>
+      <!-- little dots decoration -->
+      <circle cx="70" cy="127" r="2.5" fill="#d9b978"/>
+      <circle cx="100" cy="127" r="2.5" fill="#d9b978"/>
+      <circle cx="130" cy="127" r="2.5" fill="#d9b978"/>
+    </svg>
+  </div>
+
+  <div class="tap-label" id="tapLabel">— make a wish for her —</div>
+
+  <div class="hidden-note" id="hiddenNote">
+    There's a lot I think and don't always say.<br><br>
+    So today, I just wanted to say this much:<br>
+    I'm glad you exist. I hope this year is kind to you.
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="name-small">Mohiseen</div>
+  <p>Wishing you a year as lovely and warm as you are. Happy Birthday.</p>
+  <div class="signoff">( always, quietly yours )</div>
+  <div class="stars">✦ ✦ ✦</div>
+</section>
+
+<footer>MADE WITH CARE, FOR YOU</footer>
+
+<script>
+  // floating petals
+  const field = document.getElementById('petalField');
+  const petalPath = "M12 2C6 2 3 8 6 13c2 3 6 3 7 8 1-5 5-5 7-8 3-5 0-11-8-11z";
+  const count = 18;
+  for(let i=0;i<count;i++){
+    const wrapper = document.createElement('div');
+    wrapper.className = 'petal';
+    const size = 12 + Math.random()*18;
+    wrapper.style.left = Math.random()*100 + 'vw';
+    wrapper.style.top = (100 + Math.random()*20) + 'vh';
+    wrapper.style.width = size + 'px';
+    wrapper.style.animationDuration = (18 + Math.random()*22) + 's';
+    wrapper.style.animationDelay = (Math.random()*20) + 's';
+    wrapper.innerHTML = `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="currentColor"><path d="${petalPath}"/></svg>`;
+    field.appendChild(wrapper);
+  }
+
+  // cake / candle interaction
+  const cakeWrap = document.getElementById('cakeWrap');
+  const hiddenNote = document.getElementById('hiddenNote');
+  const tapLabel = document.getElementById('tapLabel');
+  let lit = false;
+
+  cakeWrap.addEventListener('click', () => {
+    lit = !lit;
+    cakeWrap.classList.toggle('lit', lit);
+    if(lit){
+      setTimeout(() => hiddenNote.classList.add('show'), 700);
+      tapLabel.textContent = '— tap again to blow it out —';
+    } else {
+      hiddenNote.classList.remove('show');
+      tapLabel.textContent = '— make a wish for her —';
+    }
+  });
+</script>
+
+</body>
+</html>
